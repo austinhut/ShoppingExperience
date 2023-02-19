@@ -21,4 +21,47 @@ function addProducts() {
 }
 addProducts();
 
+function saveToLocalStorage(){
+  //GOOD - function call test
+  //console.log('Function Called');
+  let cartButton = document.getElementsByClassName('cartButton');
+  
+  for (let i=0; i < cartButton.length; i++){
+    cartButton[i].addEventListener('click', ()=>{
+      
+      let selectedProduct = products.find((product) => product.id == cartButton[i].id);
+      
+      console.log('test');
+      
+      cart.push(selectedProduct);
+  
+      localStorage.setItem("CART", JSON.stringify(cart));
+
+      displayCart();
+    });
+  };
+};
+saveToLocalStorage();
+
+function displayCart() {
+  //clear existing contents of the shopping cart
+  sideBarContainer.innerHTML = '';
+
+  cart.forEach(cartItem => {
+    sideBarContainer.innerHTML += `<div class="tableRow">
+                                      <div class="tableCell">
+                                          ${cartItem.name}
+                                      </div>
+                                      <div class="tableCell">
+                                          &dollar;${cartItem.price}
+                                      </div>
+                                  </div>
+                                  <div class="tableRow">
+                                      <div class="tableCell borderBottom"></div>
+                                      <a id="${cartItem.id}" class="tableCell borderBottom removeLink" href="#">Remove</a>
+                                  </div>`;
+  });
+};
+displayCart();
+
 
