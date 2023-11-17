@@ -39,8 +39,16 @@ function removeFromCart() {
       
       localStorage.setItem('CART', JSON.stringify(cart));
 
-      displayCart();
+      if(typeof displayCart === "function"){
+        displayCart();
+      }
 
+      
+      if (typeof displayCartProducts === "function") {
+        displayCartProducts();
+        displayOrderSummary();
+      }
+      
       if (cart.length == 0) {
         localStorage.clear();
       };
@@ -59,9 +67,43 @@ function clearCart() {
     
     localStorage.clear();
     
-    displayCart();
+    if (typeof displayCart === "function") {
+      displayCart();
+    }
+
+    if (typeof displayCartProducts === "function") {
+      displayCartProducts();
+      displayOrderSummary();
+    }
   });
 };
 clearCart();
+
+function updateQuantity() {
+  
+  let quantityNumberInput = document.getElementsByClassName('quantityNumberInput');
+
+  for (i in quantityNumberInput) {
+    
+    quantityNumberInput[i].addEventListener('change', (event)=>{
+      
+      let quantityChanged = quantityNumberInput[i].value;
+
+      if (quantityChanged > 5) {
+        quantityChanged = 5;
+      }
+
+      let itemToChange = cart.find( (item) => item.id == event.target.id);
+
+      itemToChange.quantity = +quantityChanged;
+
+      localStorage.setItem('CART', JSON.stringify(cart));
+
+      if ( typeof displayOrderSummary == "function") {
+        displayOrderSummary();
+      }
+    });
+  }
+};
 
 
