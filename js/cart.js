@@ -88,6 +88,23 @@ function displayOrderSummary(){
 }
 displayOrderSummary();
 
+$(document).ready(function(){
+  
+  $('#checkoutThankYou').hide();
+
+  $('#checkoutButton').on('click', function(){
+    
+    if (subtotal == 0){
+      $('#checkoutThankYou').html("The cart is currently empty.");
+
+      $('#checkoutThankYou').slideDown();
+    }
+    else {
+      $('#checkoutThankYou').slideDown();
+    }
+  });
+});
+
 
 {/* <div class="tableRow">
       <div class="tableCell">
