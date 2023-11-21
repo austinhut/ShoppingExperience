@@ -76,6 +76,8 @@ $('.next').on('click', function(){
   paginate();
 
   saveToLocalStorage();
+
+  fadeButtons();
 });
 
 //PREVIOUS button
@@ -89,6 +91,8 @@ $('.previous').on('click', function(){
   paginate();
 
   saveToLocalStorage();
+
+  fadeButtons();
 });
 
 
